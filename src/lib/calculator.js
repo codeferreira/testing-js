@@ -1,4 +1,4 @@
-function sum(x, y) {
+export function sum(x, y) {
   const numberOne = parseInt(x, 10);
   const numberTwo = parseInt(y, 10);
 
@@ -7,8 +7,4 @@ function sum(x, y) {
   }
 
   return parseInt(x, 10) + parseInt(y, 10);
-}
-
-module.exports = {
-  sum
 }
