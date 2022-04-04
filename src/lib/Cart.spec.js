@@ -115,6 +115,22 @@ describe('Cart', () => {
     });
   });
 
+  describe('sumary', () => {
+    it('should return an object with the total, the list of items and formatted total', () => {
+      cart.add({
+        product,
+        quantity: 2,
+      });
+
+      cart.add({
+        product: product2,
+        quantity: 1,
+      });
+
+      expect(cart.summary()).toMatchSnapshot();
+    });
+  });
+
   describe('special conditions', () => {
     it('should apply percentage discount above a minimum amount', () => {
       const condition = {
@@ -188,7 +204,7 @@ describe('Cart', () => {
       expect(cart.getTotal()).toEqual(10000);
     });
 
-    it('should receive two or more conditions and determine/apply the best discount', () => {
+    it('should receive two or more conditions and determine/apply the best discount. First Case.', () => {
       const condition1 = {
         percentage: 30,
         minimum: 2,
@@ -205,6 +221,25 @@ describe('Cart', () => {
       });
 
       expect(cart.getTotal()).toEqual(30000);
+    });
+
+    it('should receive two or more conditions and determine/apply the best discount. Second Case.', () => {
+      const condition1 = {
+        percentage: 80,
+        minimum: 2,
+      };
+
+      const condition2 = {
+        quantity: 2,
+      };
+
+      cart.add({
+        product,
+        quantity: 5,
+        condition: [condition1, condition2],
+      });
+
+      expect(cart.getTotal()).toEqual(10000);
     });
   });
 });

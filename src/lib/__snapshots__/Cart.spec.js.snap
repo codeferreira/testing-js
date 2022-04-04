@@ -21,3 +21,26 @@ Object {
   "total": 40000,
 }
 `;
+
+exports[`Cart sumary should return an object with the total, the list of items and formatted total 1`] = `
+Object {
+  "formattedTotal": "R$400.00",
+  "items": Array [
+    Object {
+      "product": Object {
+        "name": "Product 1",
+        "price": 10000,
+      },
+      "quantity": 2,
+    },
+    Object {
+      "product": Object {
+        "name": "Product 2",
+        "price": 20000,
+      },
+      "quantity": 1,
+    },
+  ],
+  "total": 40000,
+}
+`;
