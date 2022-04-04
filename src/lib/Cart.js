@@ -54,13 +54,13 @@ class Cart {
 
   getTotal() {
     return this.items
-      .reduce((total, item) => {
-        const amount = Money({ amount: item.quantity * item.product.price });
+      .reduce((total, { quantity, product, condition }) => {
+        const amount = Money({ amount: quantity * product.price });
 
         let discount = Money({ amount: 0 });
 
-        if (item.condition) {
-          discount = calculateDiscount(amount, item.quantity, item.condition);
+        if (condition) {
+          discount = calculateDiscount(amount, quantity, condition);
         }
 
         return total.add(amount).subtract(discount);
@@ -84,8 +84,12 @@ class Cart {
   }
 
   sumary() {
+    const total = this.getTotal();
+    const formattedTotal = Money({ amount: total }).toFormat('$0,0.00');
+
     return {
-      total: this.getTotal(),
+      total,
+      formattedTotal,
       items: this.list(),
     };
   }
