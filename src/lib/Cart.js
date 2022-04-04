@@ -83,7 +83,7 @@ class Cart {
     return this.items;
   }
 
-  sumary() {
+  summary() {
     const total = this.getTotal();
     const formattedTotal = Money({ amount: total }).toFormat('$0,0.00');
 
